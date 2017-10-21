@@ -16,6 +16,8 @@ Serialize stack traces from the [`stack_trace`][] package.
 
 [`stack_trace`]: https://pub.dartlang.org/stack_trace
 
+Disclaimer: This is not an official Google or Dart project.
+
 * [Installation](#installation)
 * [Usage](#usage)
 * [Contributing](#contributing)
