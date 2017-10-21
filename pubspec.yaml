@@ -1,0 +1,16 @@
+name: stack_trace_codec
+description: >
+  Serialize Stack Traces.
+version: 0.1.0
+authors:
+  - Matan Lurey <matanl@google.com>
+homepage: https://github.com/matanlurey/stack_trace_codec
+
+environment:
+  sdk: ">=1.25.0-dev <2.0.0"
+
+dependencies:
+  stack_trace: ^1.0.0
+
+dev_dependencies:
+  test: ^0.12.0
