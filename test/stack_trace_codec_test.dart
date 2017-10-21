@@ -2,6 +2,8 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+import 'dart:async';
+
 import 'package:stack_trace/stack_trace.dart';
 import 'package:stack_trace_codec/stack_trace_codec.dart';
 import 'package:test/test.dart';
@@ -36,5 +38,21 @@ void main() {
         new Frame(input, 1, 8, 'memberB'),
       ]).toString(),
     );
+  });
+
+  test('should encode/decode an asynchronous stack trace (chain)', () async {
+    final trace = new Completer<Trace>();
+    await Chain.capture(() {
+      scheduleMicrotask(() {
+        Timer.run(() {
+          // ignore: only_throw_errors
+          throw 'BAD';
+        });
+      });
+    }, onError: (Object _, s) {
+      trace.complete(s.terse.toTrace());
+    });
+    final encoded = codec.encode(await trace.future);
+    expect(encoded.toString(), contains('main'));
   });
 }
